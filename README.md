@@ -4,7 +4,18 @@ PunchIT is a digital loyalty program designed to help retail stores implement a 
 What we offer:
 Businesses can create their own unique loyalty cards, tailored to their brand and customer base. Customers can collect virtual stamps with each purchase, track their progress, and easily redeem rewards at their favorite stores. In the end, our mission is to help local businesses. We want to give these small businesses a tool to compete with big brands through our loyalty program. By modernizing this type of rewards program, we can ensure local shops that we love in Amherst, Boston, and beyond, will stay competitive, one punch at a time.
 
+## Functional Requirements:
 
+### Business View:
+- Business owners will be able to register, add, and modify loyalty programs very intuitively.
+- Send push notifications towards their customer base, encouraging promotions or location-based offers.
+- See detailed statistics and analytics based on customer behavior, spending habits, and redemption trends.
+
+### Customer View:
+- Customers will be able to sign up and create an account where they can collect and redeem their digital stamps.
+- Scan QR codes at participating stores to redeem points/rewards.
+- Will be able to view and manage user profile, including transaction and redemption history, and personal information.
+- Customers can redeem rewards for referrals and providing valuable feedback.
 
 
 # React + TypeScript + Vite
