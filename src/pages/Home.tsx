@@ -1,5 +1,5 @@
 function Home() {
-    return <h1 className="text-2xl font-bold">Welcome to the Stamp App 👋</h1>
+    <h1 className="text-4xl font-bold text-blue-600">Tailwind Works!</h1>
   }
   
   export default Home

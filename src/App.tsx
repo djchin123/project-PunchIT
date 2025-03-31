@@ -1,12 +1,11 @@
-import { Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
+import React from 'react'
 
-function App() {
+const Home: React.FC = () => {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-    </Routes>
+    <div className="text-3xl font-bold text-blue-600">
+      Welcome to the Stamp App
+    </div>
   )
 }
 
-export default App
+export default Home
