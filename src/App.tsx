@@ -1,11 +1,10 @@
-import React from 'react'
+import { useRoutes } from 'react-router-dom'
+import customerRoutes from './routes/customerRoutes'
+import businessRoutes from './routes/businessRoutes'
 
-const Home: React.FC = () => {
-  return (
-    <div className="text-3xl font-bold text-blue-600">
-      Welcome to the Stamp App
-    </div>
-  )
+function App() {
+  const routes = useRoutes([...customerRoutes, ...businessRoutes])
+  return routes
 }
 
-export default Home
+export default App
