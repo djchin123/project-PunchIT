@@ -7,6 +7,7 @@ import "../../../styles/customer/rewards/tiers.css";
 import "../../../styles/customer/rewards/referrals.css";
 import "../../../styles/customer/rewards/cards.css";
 import "../../../styles/customer/rewards/stamps.css";
+import "../../../styles/customer/rewards/layout.css";
 
 export default function RewardsPage() {
   const [redeemed, setRedeemed] = useState<string[]>([]);
@@ -24,15 +25,16 @@ export default function RewardsPage() {
   ];
 
   return (
-    <div className="rewards-page p-6 bg-blue-50 min-h-screen">
-      <div className="max-w-5xl mx-auto space-y-8">
-        <div className="grid md:grid-cols-2 gap-6">
+    <div className="rewards-page">
+      <div className="container">
+        <div className="top-section">
           <Tiers />
           <Referrals />
         </div>
-        <div>
-          <h3 className="text-lg font-semibold mb-4">Redeem Stamps For Rewards</h3>
-          <div className="grid md:grid-cols-3 gap-4">
+
+        <div className="rewards-section">
+          <h3 className="section-title">Redeem Stamps For Rewards</h3>
+          <div className="rewards-grid">
             {rewards.map((reward) => (
               <RedeemItem
                 key={reward.title}
@@ -44,7 +46,11 @@ export default function RewardsPage() {
             ))}
           </div>
         </div>
-        <StampsTable />
+
+        <div className="activity-section">
+          <h3 className="section-title">Stamp Activity</h3>
+          <StampsTable />
+        </div>
       </div>
     </div>
   );
