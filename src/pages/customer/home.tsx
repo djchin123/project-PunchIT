@@ -1,6 +1,7 @@
-const CustomerHome = () => {
-    return <div>Customer Home Page</div>
-  }
-  
-  export default CustomerHome
-  
+import HomePageLayout from '../../components/customer/HomePage/HomePageLayout'
+
+const Home = () => {
+  return <HomePageLayout />
+}
+
+export default Home
