@@ -4,6 +4,7 @@ import Home from './pages/customer/home';
 import Rewards from './pages/customer/rewards';
 import CustomerLayout from './components/customer/CustomerLayout';
 
+
 function App() {
   return (
     <BrowserRouter>
@@ -23,6 +24,7 @@ function App() {
 
         {/* logged in as business: */}
         {/* <Route path="/business/dashboard" element={<BusinessDashboard />} /> */}
+
       </Routes>
     </BrowserRouter>
   );
