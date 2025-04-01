@@ -16,7 +16,7 @@ const ProfilePage: React.FC = () => {
   const user: User = {
     name: 'Vedant Ajwani',
     email: 'vedant@gmail.com',
-    number: '9012439132',
+    number: '(901) 243-9132',
     timeWithCompany: '3 years',
     avatarUrl: profilepic,
   };
