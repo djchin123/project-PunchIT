@@ -1,0 +1,39 @@
+.punch-card {
+    background: #fff3ef;
+    padding: 16px;
+    border-radius: 10px;
+    margin: 20px;
+  }
+  
+  .top-row, .bottom-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 80px;
+  }
+  
+  .stamp-count {
+    font-size: 12px;
+  }
+  
+  .stamps {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin: 16px 0;
+  }
+  
+  .circle {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #b2834a;
+    border-radius: 50%;
+  }
+  
+  .filled {
+    background: #b2834a;
+  }
+  
