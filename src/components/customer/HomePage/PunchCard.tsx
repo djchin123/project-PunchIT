@@ -18,7 +18,7 @@ const PunchCard = ({ total = 10, filled = 4 }) => {
       </div>
 
       <div className="bottom-row">
-        <span className="reward">NEXT REWARD: Free Photo</span>
+        <span className="reward">NEXT REWARD: Free Photo: 1 stamp</span>
         <span className="name">Customer Name: Brian Cheung</span>
       </div>
     </div>
