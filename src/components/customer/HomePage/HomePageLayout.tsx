@@ -1,6 +1,7 @@
 import BottomNav from './BottomNav'
 import '../../../styles/customer/home/layout.css'
 import PunchCard from './PunchCard'
+import RewardsWidget from './RewardsWiget'
 
 const HomePageLayout = () => {
   return (
@@ -9,6 +10,7 @@ const HomePageLayout = () => {
       <p>We miss you! Last scan: March 28, 2025</p>
 
       <PunchCard total={10} filled={4} />
+      <RewardsWidget />
 
       <BottomNav />
     </div>
