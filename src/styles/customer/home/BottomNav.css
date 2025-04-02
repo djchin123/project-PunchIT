@@ -4,12 +4,13 @@
   left: 0;
   right: 0;
   height: 56px;
-  background-color: #edd9c0;
+  background-color: #fff; 
   border-top: 1px solid #ddd;
   display: flex;
   justify-content: space-around;
   align-items: center;
   z-index: 10;
+  box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05); 
 }
 
 .nav-link {
@@ -19,6 +20,11 @@
   font-weight: 500;
   padding: 6px;
   position: relative;
+  transition: color 0.2s;
+}
+
+.nav-link:hover {
+  color: #b2834a;
 }
 
 .nav-link.active {

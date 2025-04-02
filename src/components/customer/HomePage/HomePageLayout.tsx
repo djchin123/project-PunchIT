@@ -10,7 +10,7 @@ const HomePageLayout = () => {
       <h1 className="greeting">Welcome back, Brian</h1>
       <p>We miss you! Last scan: March 28, 2025</p>
 
-      <PunchCard total={10} filled={4} />
+      <PunchCard total={12} filled={4} />
       <RewardsWidget />
 
       <BottomNav />
