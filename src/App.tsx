@@ -3,6 +3,7 @@ import Auth from './pages/customer/auth';
 import Home from './pages/customer/home';
 import Rewards from './pages/customer/rewards';
 import CustomerLayout from './components/customer/CustomerLayout';
+import Profile from './components/customer/profilePage/ProfileLayout';
 
 
 function App() {
@@ -17,8 +18,8 @@ function App() {
           <Route index element={<Home />} />
           <Route path="home" element={<Home />} />
           <Route path="rewards" element={<Rewards />} />
-          {/* <Route path="/scan" element={<QRScan />} />
-          <Route path="/profile" element={<Profile />} /> */}
+          <Route path="profile" element={<Profile />} />
+          {/* <Route path="/scan" element={<QRScan />} /> */}
 
         </Route>
 

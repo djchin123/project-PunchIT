@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import '../../styles/auth/auth.css';
 import { useNavigate } from 'react-router-dom';
-import logo from '../../assets/logo.png';  
+import logo from '../../assets/logo.png';
 
 const Auth = () => {
   const navigate = useNavigate();
@@ -10,10 +10,18 @@ const Auth = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  // For forgot-password modal
+  // Forgot password modal
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   const [emailForReset, setEmailForReset] = useState('');
 
+  // Register modal
+  const [showRegister, setShowRegister] = useState(false);
+  const [registerEmail, setRegisterEmail] = useState('');
+  const [registerPassword, setRegisterPassword] = useState('');
+
+  // ---------------------------
+  // LOGIN LOGIC
+  // ---------------------------
   const handleLogin = async () => {
     try {
       const response = await fetch('http://localhost:3001/api/login', {
@@ -21,27 +29,34 @@ const Auth = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email: username, password }),
       });
-  
+
       const data = await response.json();
       if (response.ok) {
-          if (isBusinessLogin) {
-            navigate('/business/dashboard');
-          } else {
-            navigate('/customer');
-          }
+        if (isBusinessLogin) {
+          navigate('/business/dashboard');
         } else {
-          alert(data.error || 'Login failed');
+          // If not business, route to your main customer page
+          navigate('/customer');
         }
-      } catch (error) {
-        console.error(error);
-        alert('An error occurred during login.');
+      } else {
+        alert(data.error || 'Login failed');
       }
-    };
-
-  const handleToggleLoginType = () => {
-    setIsBusinessLogin(prev => !prev);
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred during login.');
+    }
   };
 
+  // ---------------------------
+  // SWITCH TO BUSINESS LOGIN
+  // ---------------------------
+  const handleToggleLoginType = () => {
+    setIsBusinessLogin((prev) => !prev);
+  };
+
+  // ---------------------------
+  // FORGOT PASSWORD MODAL
+  // ---------------------------
   const handleForgotPassword = () => {
     setShowForgotPassword(true);
   };
@@ -56,18 +71,56 @@ const Auth = () => {
     setShowForgotPassword(false);
   };
 
+  // ---------------------------
+  // REGISTER MODAL
+  // ---------------------------
+  const handleOpenRegister = () => {
+    setShowRegister(true);
+  };
+
+  const handleCloseRegister = () => {
+    setShowRegister(false);
+    setRegisterEmail('');
+    setRegisterPassword('');
+  };
+
+  const handleRegister = async () => {
+    try {
+      const response = await fetch('http://localhost:3001/api/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: registerEmail, password: registerPassword }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        alert('Registration successful!');
+        setShowRegister(false);
+      } else {
+        alert(data.error || 'Registration failed');
+      }
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred during registration.');
+    }
+  };
+
   return (
     <div className="auth-container">
+      {/* LOGO */}
       <div className="auth-logo">
         <img src={logo} alt="App Logo" className="fade-in-logo" />
       </div>
 
+      {/* TITLE */}
       <h1 className="auth-title">
         {isBusinessLogin ? 'Business Login' : 'Customer Login'}
       </h1>
 
+      {/* LOGIN FORM */}
       <div className="auth-form slide-up-animation">
-        <label htmlFor="username" className="form-label">Email</label>
+        <label htmlFor="username" className="form-label">
+          Email
+        </label>
         <input
           id="username"
           type="email"
@@ -76,7 +129,9 @@ const Auth = () => {
           onChange={(e) => setUsername(e.target.value)}
         />
 
-        <label htmlFor="password" className="form-label">Password</label>
+        <label htmlFor="password" className="form-label">
+          Password
+        </label>
         <input
           id="password"
           type="password"
@@ -94,12 +149,13 @@ const Auth = () => {
             Forgot Password?
           </button>
 
+          {/* REPLACE OLD SWITCH BUTTON WITH REGISTER */}
           <button
             type="button"
-            className="toggle-login"
-            onClick={handleToggleLoginType}
+            className="register-button"
+            onClick={handleOpenRegister}
           >
-            Switch to {isBusinessLogin ? 'Customer' : 'Business'} Login
+            New here? Register now!
           </button>
         </div>
 
@@ -108,7 +164,25 @@ const Auth = () => {
         </button>
       </div>
 
-      {/* Modal Popup for Forgot Password */}
+      {/* A SMALL LINK FOR SWITCHING TO BUSINESS LOGIN */}
+      <div className="switch-login-type">
+        <button
+          type="button"
+          onClick={handleToggleLoginType}
+          style={{
+            background: 'none',
+            border: 'none',
+            textDecoration: 'underline',
+            cursor: 'pointer',
+            marginTop: '10px',
+            color: '#555',
+          }}
+        >
+          {isBusinessLogin ? 'Switch to Customer Login' : 'Switch to Business Login'}
+        </button>
+      </div>
+
+      {/* FORGOT PASSWORD MODAL */}
       {showForgotPassword && (
         <div className="modal-backdrop">
           <div className="modal-content">
@@ -123,6 +197,33 @@ const Auth = () => {
             <div className="modal-buttons">
               <button onClick={handleSendResetLink}>Send Link</button>
               <button onClick={handleCloseModal}>Cancel</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* REGISTER MODAL */}
+      {showRegister && (
+        <div className="modal-backdrop">
+          <div className="modal-content">
+            <h2>Create an Account</h2>
+            <label>Email</label>
+            <input
+              type="email"
+              placeholder="Enter email"
+              value={registerEmail}
+              onChange={(e) => setRegisterEmail(e.target.value)}
+            />
+            <label>Password</label>
+            <input
+              type="password"
+              placeholder="Enter password"
+              value={registerPassword}
+              onChange={(e) => setRegisterPassword(e.target.value)}
+            />
+            <div className="modal-buttons">
+              <button onClick={handleRegister}>Register</button>
+              <button onClick={handleCloseRegister}>Cancel</button>
             </div>
           </div>
         </div>
