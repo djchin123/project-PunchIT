@@ -1,0 +1,45 @@
+.profile-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: #fff;
+    text-align: center;
+  }
+  
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .user-details {
+    margin-top: 20px;
+  }
+  
+  .user-details h2 {
+    color: #b2834a;
+    margin-bottom: 6px;
+  }
+  
+  .user-details p {
+    color: #555;
+    margin: 4px 0;
+  }
+  
+  .logout-button {
+    padding: 10px 20px;
+    background-color: #b2834a;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  .logout-button:hover {
+    opacity: 0.9;
+  }
+  
