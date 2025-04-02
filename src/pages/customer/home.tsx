@@ -1,3 +1,4 @@
+//home.tsx
 import HomePageLayout from '../../components/customer/HomePage/HomePageLayout'
 
 const Home = () => {

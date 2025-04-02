@@ -1,4 +1,4 @@
-import React from "react";
+//referrals.tsx
 import "../../../styles/customer/rewards/referrals.css";
 
 export default function Referrals() {

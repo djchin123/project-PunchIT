@@ -1,4 +1,4 @@
-// src/components/LogoutButton.tsx
+//LogoutButton.tsx
 import React from 'react';
 
 interface LogoutButtonProps {

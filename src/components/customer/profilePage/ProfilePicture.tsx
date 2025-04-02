@@ -1,4 +1,4 @@
-// src/components/customer/profilePage/ProfilePicture.tsx
+//ProfilePicture.tsx
 import React from 'react';
 import profilepic from '../../../assets/profilepic.png';
 

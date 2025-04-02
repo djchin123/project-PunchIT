@@ -1,4 +1,4 @@
-import React from "react";
+//reward-cards.tsx
 import "../../../styles/customer/rewards/cards.css";
 
 interface RedeemItemProps {

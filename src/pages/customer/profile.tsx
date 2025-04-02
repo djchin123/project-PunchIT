@@ -1,3 +1,4 @@
+//profile.tsx
 import ProfilePage from "../../components/customer/profilePage/ProfileLayout";
 
 const Profile = () => {

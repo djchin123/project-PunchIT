@@ -1,3 +1,4 @@
+//HomePageLayout.tsx
 import BottomNav from './BottomNav'
 import '../../../styles/customer/home/layout.css'
 import PunchCard from './PunchCard'

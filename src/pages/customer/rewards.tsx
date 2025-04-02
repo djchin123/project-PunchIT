@@ -1,3 +1,4 @@
+//rewards.tsx
 import RewardsPage from "../../components/customer/rewards-page/RewardsLayout";
 
 const Rewards = () => {

@@ -1,4 +1,4 @@
-import React from "react";
+//stamps-table.tsx
 import "../../../styles/customer/rewards/stamps.css";
 
 export default function StampsTable() {

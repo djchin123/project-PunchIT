@@ -1,3 +1,4 @@
+//PunchCard.tsx
 import '../../../styles/customer/home/PunchCard.css'
 import logo from '../../../assets/logo.png'
 

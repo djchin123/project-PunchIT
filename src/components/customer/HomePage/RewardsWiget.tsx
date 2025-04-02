@@ -1,3 +1,4 @@
+//RewardsWidget.tsx
 import { useNavigate } from 'react-router-dom'
 import '../../../styles/customer/home/RewardsWiget.css'
 
