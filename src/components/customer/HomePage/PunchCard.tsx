@@ -1,7 +1,8 @@
+//PunchCard.tsx
 import '../../../styles/customer/home/PunchCard.css'
 import logo from '../../../assets/logo.png'
 
-const PunchCard = ({ total = 10, filled = 4 }) => {
+const PunchCard = ({ total = 12, filled = 4 }) => {
   const stamps = Array.from({ length: total }, (_, i) => i < filled)
 
   return (

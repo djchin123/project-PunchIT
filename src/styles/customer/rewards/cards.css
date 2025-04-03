@@ -1,45 +1,46 @@
 .redeem-item {
-    background-color: #1e40af;
-    color: white;
-    border-radius: 0.75rem;
-    padding: 1.5rem; 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-                0 4px 6px -4px rgba(0, 0, 0, 0.1); 
-  }
-  
-  .item-title {
-    font-size: 1.25rem;
-    font-weight: 700;  
-  }
-  
-  .item-stamps {
-    font-size: 0.875rem;
-    margin-bottom: 1rem; 
-  }
-  
-  .redeem-button {
-    padding: 0.5rem 1rem; 
-    border-radius: 0.5rem; 
-    font-weight: 600; 
-    transition: all 0.3s ease; 
-  }
-  
-  .redeem-button.active {
-    background-color: white;
-    color: #1e40af; 
-  }
-  
-  .redeem-button.active:hover {
-    background-color: #bfdbfe;
-  }
-  
-  .redeem-button.redeemed {
-    background-color: #9ca3af; 
-    color: white;
-    cursor: not-allowed;
-  }
-  
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  margin: 16px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.redeem-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.item-title {
+  font-size: 1rem;
+  color: #b2834a;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.item-stamps {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 12px;
+}
+
+.redeem-button {
+  background-color: #b2834a;
+  border: none;
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.redeem-button:hover {
+  opacity: 0.9;
+}
+.redeem-button.active {
+  background-color: #b2834a;
+}
+.redeem-button.redeemed {
+  background-color: #999;
+  cursor: not-allowed;
+}

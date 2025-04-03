@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+//RewardsLayout.tsx
+import { useState } from "react";
 import Tiers from "./tiers";
 import Referrals from "./referrals";
 import RedeemItem from "./reward-cards";

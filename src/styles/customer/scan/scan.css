@@ -1,0 +1,150 @@
+/* scan.css */
+.scan-page {
+    min-height: 100vh;
+    background: #fafafa;
+    padding: 20px;
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .scan-title {
+    font-size: 1.8rem;
+    color: #b2834a;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* QR container card */
+  .qr-container {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 0 auto 20px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    text-align: center;
+    animation: slideUp 0.5s ease forwards;
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  
+  @keyframes slideUp {
+    0% {
+      opacity: 0; 
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1; 
+      transform: translateY(0);
+    }
+  }
+  
+  .qr-image {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  .qr-instructions {
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 8px;
+  }
+  
+  /* Store Locator Card */
+  .store-locator {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: slideUp 0.5s ease forwards;
+    transform: translateY(30px);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .section-title {
+    font-size: 1.2rem;
+    color: #b2834a;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  
+  .locator-text {
+    font-size: 0.95rem;
+    color: #555;
+    margin-bottom: 12px;
+  }
+  
+  .input-group {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  
+  .pin-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .button-locate {
+    background-color: #b2834a;
+    border: none;
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  .button-locate:hover {
+    opacity: 0.9;
+  }
+  
+  .placeholder-info {
+    font-size: 0.85rem;
+    color: #777;
+    margin-top: 12px;
+    text-align: center;
+  }
+  
+  /* Additional help card */
+  .scan-help {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    animation: slideUp 0.5s ease forwards;
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  
+  .scan-help p {
+    color: #555;
+    font-size: 0.9rem;
+    margin: 4px 0;
+  }
+  
+  .scan-help a {
+    color: #b2834a;
+  }
+  

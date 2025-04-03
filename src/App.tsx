@@ -3,7 +3,8 @@ import Auth from './pages/customer/auth';
 import Home from './pages/customer/home';
 import Rewards from './pages/customer/rewards';
 import CustomerLayout from './components/customer/CustomerLayout';
-import Profile from './components/customer/profilePage/ProfileLayout';
+import Profile from './pages/customer/profile';
+import Scan from './pages/customer/scan';
 
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
           <Route path="home" element={<Home />} />
           <Route path="rewards" element={<Rewards />} />
           <Route path="profile" element={<Profile />} />
-          {/* <Route path="/scan" element={<QRScan />} /> */}
+          <Route path="scan" element={<Scan />} /> 
 
         </Route>
 

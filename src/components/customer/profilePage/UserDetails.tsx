@@ -1,4 +1,4 @@
-// src/components/customer/profilePage/UserDetails.tsx
+//UserDetails.tsx
 import React from 'react';
 
 interface UserDetailsProps {

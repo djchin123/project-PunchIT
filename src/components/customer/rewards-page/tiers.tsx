@@ -1,4 +1,4 @@
-import React from "react";
+//tiers.tsx
 import "../../../styles/customer/rewards/tiers.css";
 
 export default function Tiers() {

@@ -1,39 +1,78 @@
 .punch-card {
-    background: #fff3ef;
-    padding: 16px;
-    border-radius: 10px;
-    margin: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 24px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.5s ease forwards;
+  transform: translateY(30px);
+  opacity: 0;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
   }
-  
-  .top-row, .bottom-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .logo {
-    width: 80px;
-  }
-  
-  .stamp-count {
-    font-size: 12px;
-  }
-  
-  .stamps {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    margin: 16px 0;
-  }
-  
-  .circle {
-    width: 40px;
-    height: 40px;
-    border: 2px solid #b2834a;
-    border-radius: 50%;
-  }
-  
-  .filled {
-    background: #b2834a;
-  }
-  
+}
+
+.punch-card .top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.punch-card .logo {
+  width: 80px;
+  height: 50px;
+  object-fit: fill;
+}
+
+.stamp-count {
+  font-weight: 700;
+  color: #b2834a;
+}
+
+.stamps {
+  display: flex;
+  gap: 75px;
+  margin: 28px 0;
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #eee;
+  transition: background-color 0.3s, transform 0.2s;
+}
+.circle.filled {
+  background-color: #b2834a;
+  transform: scale(1.1);
+}
+
+.circle:hover {
+  transform: scale(1.35);
+}
+
+.bottom-row {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.reward {
+  font-weight: 600;
+  color: #b2834a;
+  margin-bottom: 4px;
+}
+
+.name {
+  color: #333;
+}

@@ -1,3 +1,4 @@
+//BottomNav.tsx
 import { NavLink } from 'react-router-dom'
 import '../../../styles/customer/home/BottomNav.css'
 

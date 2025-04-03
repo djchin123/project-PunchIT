@@ -1,3 +1,4 @@
+//ProfileLayout.tsx
 import React from 'react';
 import ProfilePicture from './ProfilePicture';
 import UserDetails from './UserDetails';
