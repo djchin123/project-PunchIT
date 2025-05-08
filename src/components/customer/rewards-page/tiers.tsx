@@ -7,7 +7,7 @@ export default function Tiers() {
       <h2 className="label">Tier Status</h2>
       <p className="value">Bronze</p>
       <h2 className="label">Available Stamps</h2>
-      <p className="value">2</p>
+      <p className="value">4</p>
     </div>
   );
 }
