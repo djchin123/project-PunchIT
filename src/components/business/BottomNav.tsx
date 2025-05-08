@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import '../../styles/business/BottomNav.css';
 
 const BottomNav = () => {
   return (
@@ -16,7 +17,7 @@ const BottomNav = () => {
         Account
       </NavLink>
     </nav>
-  )
-}
+  );
+};
 
 export default BottomNav;

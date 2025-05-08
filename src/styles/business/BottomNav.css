@@ -1,0 +1,46 @@
+/* src/styles/business/BottomNav.css */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 56px;
+    background-color: #fff; 
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 10;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.05); 
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #555;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 6px;
+    position: relative;
+    transition: color 0.2s;
+  }
+  
+  .nav-link:hover {
+    color: #b2834a;
+  }
+  
+  .nav-link.active {
+    color: #b2834a;
+  }
+  
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: #b2834a;
+    border-radius: 50%;
+  }
+  

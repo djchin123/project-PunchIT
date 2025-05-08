@@ -1,10 +1,11 @@
 import { Outlet } from 'react-router-dom';
+import BottomNav from '../../../components/business/BottomNav';
 
 const DashboardLayout = () => {
   return (
-    <div>
-      <h1>Business Dashboard Layout</h1>
+    <div className="business-dashboard">
       <Outlet />
+      <BottomNav />
     </div>
   );
 };
