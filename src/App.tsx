@@ -6,7 +6,7 @@ import CustomerLayout from './components/customer/CustomerLayout';
 import Profile from './pages/customer/profile';
 import Scan from './pages/customer/scan';
 import DashboardLayout from './pages/business/dashboard/DashboardLayout';
-import BusinessHome from './pages/business/dashboard/Home';
+import BusinessHome from './pages/business/dashboard/home';
 import Messages from './pages/business/messages/Messages';
 import Stamp from './pages/business/stamp/Stamp';
 import Account from './pages/business/account/Account';
