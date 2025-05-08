@@ -1,6 +1,8 @@
-const Stamp = () => {
-    return <div>Stamp Page</div>;
+import QRCodePage from "../../../components/business/scan-page/qr-page";
+
+const ScanPage = () => {
+    return <QRCodePage />;
   };
   
-  export default Stamp;
+  export default ScanPage;
   
