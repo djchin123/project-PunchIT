@@ -13,7 +13,7 @@ const RewardsWidget = () => {
           <p>No rewards</p>
           <p className="subtext">Take more photos to earn stamps.</p>
         </div>
-        <button onClick={() => navigate('/scan')}>Scan now</button>
+        <button onClick={() => navigate('customer/scan')}>Scan now</button>
       </div>
     </div>
   )
