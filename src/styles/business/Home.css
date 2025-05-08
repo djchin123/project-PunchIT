@@ -90,3 +90,33 @@
 .action-button:hover {
   background-color: #a2733a;
 }
+
+/* Business Info Container */
+.business-info-container {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.account-button {
+  background-color: #b2834a;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s;
+  margin-top: 15px;
+}
+
+.account-button:hover {
+  background-color: #a2733a;
+}
