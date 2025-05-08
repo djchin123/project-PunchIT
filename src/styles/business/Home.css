@@ -1,0 +1,122 @@
+/* src/styles/business/Home.css */
+.business-home {
+  min-height: 100vh; 
+  background: #fafafa; 
+  padding: 20px;
+}
+
+.greeting {
+  font-size: 1.8rem;
+  color: #b2834a;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stamp-card-design {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.5s ease forwards;
+}
+
+.stamp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.edit-button {
+  background-color: #b2834a;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.edit-button:hover {
+  background-color: #a2733a;
+}
+
+.card-preview {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fafafa;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.card-preview > div {
+  transform: scale(0.8); /* Shrink down to fit nicely */
+  transform-origin: top left;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.link-section {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.link-section p {
+  margin-bottom: 10px;
+  color: #b2834a;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.action-button {
+  background-color: #b2834a;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.action-button:hover {
+  background-color: #a2733a;
+}
+
+/* Business Info Container */
+.business-info-container {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.account-button {
+  background-color: #b2834a;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s;
+  margin-top: 15px;
+}
+
+.account-button:hover {
+  background-color: #a2733a;
+}

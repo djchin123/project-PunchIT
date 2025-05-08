@@ -1,0 +1,26 @@
+/* src/styles/business/CardPreview.css */
+.card-preview {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease forwards;
+  }
+  
+  .card-frame {
+    margin-top: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fafafa;
+    overflow: hidden;
+  }
+  
+  .card-frame > div {
+    transform: scale(0.8); /* Shrink down to fit nicely */
+    transform-origin: top left;
+    height: 400px;
+    overflow-y: auto;
+  }
+  
