@@ -8,7 +8,7 @@ import Scan from './pages/customer/scan';
 import DashboardLayout from './pages/business/dashboard/DashboardLayout';
 import BusinessHome from './pages/business/dashboard/Home';
 import Messages from './pages/business/messages/Messages';
-import Stamp from './pages/business/stamp/Stamp';
+import ScanPage from './pages/business/scan/scan-page';
 import Account from './pages/business/account/Account';
 
 function App() {
@@ -34,7 +34,7 @@ function App() {
           <Route path="dashboard" element={<BusinessHome />} />
           <Route path="home" element={<BusinessHome />} />
           <Route path="messages" element={<Messages />} />
-          <Route path="stamp" element={<Stamp />} />
+          <Route path="scan-page" element={<ScanPage />} />
           <Route path="account" element={<Account />} />
         </Route>
       </Routes>

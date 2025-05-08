@@ -1,0 +1,39 @@
+
+.qr-scanner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+}
+
+.qr-scanner-box {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.qr-scanner-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #b08d57;
+  margin-bottom: 2.0rem;
+}
+
+.qr-reader {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.qr-scanner-button:hover {
+  background-color: #a07d4b;
+}
+
