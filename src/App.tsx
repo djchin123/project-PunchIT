@@ -5,7 +5,11 @@ import Rewards from './pages/customer/rewards';
 import CustomerLayout from './components/customer/CustomerLayout';
 import Profile from './pages/customer/profile';
 import Scan from './pages/customer/scan';
-
+import DashboardLayout from './pages/business/dashboard/DashboardLayout';
+import BusinessHome from './pages/business/dashboard/Home';
+import Messages from './pages/business/messages/Messages';
+import Stamp from './pages/business/stamp/Stamp';
+import Account from './pages/business/account/Account';
 
 function App() {
   return (
@@ -25,8 +29,14 @@ function App() {
         </Route>
 
         {/* logged in as business: */}
-        {/* <Route path="/business/dashboard" element={<BusinessDashboard />} /> */}
-
+        <Route path="/business" element={<DashboardLayout />}>
+          <Route index element={<BusinessHome />} />
+          <Route path="dashboard" element={<BusinessHome />} />
+          <Route path="home" element={<BusinessHome />} />
+          <Route path="messages" element={<Messages />} />
+          <Route path="stamp" element={<Stamp />} />
+          <Route path="account" element={<Account />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
