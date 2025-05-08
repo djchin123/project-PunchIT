@@ -4,7 +4,7 @@ import "../../../styles/business/scan-page/scan-style.css";
 
 
 const QRCodePage = () => {
-    const url = "http://localhost:3000/rewards-page"; // rewards page url
+    const url = "http://localhost:5173/customer/rewards"; // rewards page url
 
     return (
         <div className="qr-code-page">
