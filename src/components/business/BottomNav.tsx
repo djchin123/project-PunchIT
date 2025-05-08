@@ -10,8 +10,11 @@ const BottomNav = () => {
       <NavLink to="/business/messages" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
         Messages
       </NavLink>
-      <NavLink to="/business/stamp" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
-        Stamp
+      <NavLink 
+        to="/business/scan-page" 
+        className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+      >
+        Scan
       </NavLink>
       <NavLink to="/business/account" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>
         Account
