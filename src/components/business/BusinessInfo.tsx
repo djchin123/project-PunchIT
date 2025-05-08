@@ -2,6 +2,7 @@ import '../../styles/business/BusinessInfo.css';
 
 const BusinessInfo = () => {
   return (
+    //mock data for business information
     <div className="business-info">
       <h3>Business Information</h3>
       <p>Address: 230 Newbury St, Boston, MA</p>
