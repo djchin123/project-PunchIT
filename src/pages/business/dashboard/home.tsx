@@ -1,46 +1,50 @@
 import LoyaltyCard from '../../../components/business/LoyaltyCard';
 import LoyaltyStats from '../../../components/business/LoyaltyStats';
 import BusinessInfo from '../../../components/business/BusinessInfo';
-import CardPreview from '../../../components/business/CardPreview';
+import EditCardModal from '../../../components/business/EditCardModal';
+import Home from '../../../pages/customer/home';
 import '../../../styles/business/Home.css';
 import { useState } from 'react';
 
 const BusinessHome = () => {
-  // Temporary mock data (we will replace this with actual API calls later)
   const businessName = "Memory Shop";
   const activeCards = 548;
   const [isEditing, setIsEditing] = useState(false);
 
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
   return (
     <div className="business-home">
-      {/* Business Name Display */}
       <h1 className="greeting">{businessName}</h1>
       <p>Welcome back! Here is your business overview:</p>
-
-      {/* Loyalty Card Section */}
-      <LoyaltyCard />
 
       {/* Active Cards Counter */}
       <LoyaltyStats activeCards={activeCards} />
 
-      {/* Business Info */}
-      <BusinessInfo />
+      {/* Stamp Card Design Section */}
+      <div className="stamp-card-design">
+        <h3>Your Stamp Card Design</h3>
 
-      {/* Card Preview */}
-      <CardPreview />
+        {/* Actual Preview of Customer Home */}
+        <div className="card-preview">
+          <Home />
+        </div>
 
-      {/* Edit Button */}
-      <div className="edit-button-container">
-        <button className="edit-button" onClick={handleEditClick}>
-          Edit Card
-        </button>
+        {/* Link and Actions */}
+        <div className="link-section">
+          <p>memoryshop.com/loyalty</p>
+          <div className="button-group">
+            <button className="action-button">Copy Link For Customers</button>
+            <button className="action-button">Save QR For Sharing</button>
+          </div>
+          <button className="edit-button" onClick={() => setIsEditing(true)}>
+            Edit Card
+          </button>
+        </div>
       </div>
+        {/* Business Info */}
+        <BusinessInfo />
 
-      {isEditing && <div className="edit-modal">Card Editing View Coming Soon...</div>}
+      {/* Modal Window */}
+      <EditCardModal isOpen={isEditing} onClose={() => setIsEditing(false)} />
     </div>
   );
 };

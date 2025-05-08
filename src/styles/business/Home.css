@@ -1,47 +1,92 @@
 /* src/styles/business/Home.css */
-
 .business-home {
-    min-height: 100vh; 
-    background: #fafafa; 
-    padding: 20px;
-    animation: fadeIn 0.5s ease forwards;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .greeting {
-    font-size: 1.8rem;
-    color: #b2834a;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    animation: slideDown 0.5s ease forwards;
-  }
-  
-  @keyframes slideDown {
-    from {
-      opacity: 0;
-      transform: translateY(-15px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .section-title {
-    font-size: 1.25rem;
-    color: #b2834a;
-    margin: 16px 0 8px;
-    text-transform: uppercase;
-  }
-  
+  min-height: 100vh; 
+  background: #fafafa; 
+  padding: 20px;
+}
+
+.greeting {
+  font-size: 1.8rem;
+  color: #b2834a;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stamp-card-design {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.5s ease forwards;
+}
+
+.stamp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.edit-button {
+  background-color: #b2834a;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.edit-button:hover {
+  background-color: #a2733a;
+}
+
+.card-preview {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fafafa;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.card-preview > div {
+  transform: scale(0.8); /* Shrink down to fit nicely */
+  transform-origin: top left;
+  height: 400px;
+  overflow-y: auto;
+}
+
+.link-section {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.link-section p {
+  margin-bottom: 10px;
+  color: #b2834a;
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.action-button {
+  background-color: #b2834a;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.action-button:hover {
+  background-color: #a2733a;
+}
