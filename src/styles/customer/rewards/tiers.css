@@ -1,5 +1,5 @@
 .tier-container {
-    background: linear-gradient(to right, #b2834a, #fff);
+    background: linear-gradient(to right, #b2834a, #FFF7F3);
     color: white;
     padding: 1.5rem;
     border-radius: 1rem;
@@ -10,11 +10,13 @@
   .tier-container .label {
     font-size: 1.125rem;
     font-weight: 500;
+    color: #fff;
   }
   
   .tier-container .value {
     font-size: 1.875rem;
     font-weight: 700;
     margin-top: 0.5rem;
+    color: #fff;
   }
   
