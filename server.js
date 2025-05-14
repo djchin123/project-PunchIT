@@ -136,12 +136,11 @@ app.get('/api/customer/:id/summary', async (req, res) => {
       u.referral_code = newCode;
     }
 
-/* tier thresholds: 0-3 Bronze, 4-7 Silver, 8+ Gold */
-const tier = "Bronze"; // default
 
-if (u.total_stamps >= 12) {tier = 'Gold';} 
-else if (u.total_stamps >= 8) {tier = 'Silver';}
-else if (u.total_stamps >= 4) {tier = 'Bronze';}
+/* tier thresholds: 0-3 Bronze · 4-7 Silver · 8+ Gold  */
+let tier = 'Bronze';
+if      (u.total_stamps >= 8) tier = 'Gold';
+else if (u.total_stamps >= 4) tier = 'Silver';
 
 
     const actQ = await run(
@@ -251,6 +250,7 @@ app.post('/api/customer/:id/redeem', async (req, res) => {
     res.status(500).json({ error:'Redeem failed' });
   }
 });
+export { app };       
 
 /* ─────────────── LISTEN ─────────────── */
 const PORT = process.env.PORT || 3001;
