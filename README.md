@@ -17,6 +17,11 @@ Businesses can create their own unique loyalty cards, tailored to their brand an
 - Will be able to view and manage user profile, including transaction and redemption history, and personal information.
 - Customers can redeem rewards for referrals and providing valuable feedback.
 
+### User Testing:
+- QR Code scanning functionality not implemented yet
+- Users can test adding stamps using a code provided by the business instead
+- The secret keys are added by default into the database and can be used as following:
+- Input "secret-key-n" (where n is any number 1-10, for ex, secret-key-1) in the Enter Secret Key field on the Scan page to increase your stamps
 
 # React + TypeScript + Vite
 
