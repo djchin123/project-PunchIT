@@ -1,15 +1,8 @@
-//stamps-table.tsx
+// stamps-table.tsx  – live activity feed
 import "../../../styles/customer/rewards/stamps.css";
 
-export default function StampsTable() {
-  const activity = [
-    { date: "7/14/2023", activity: "Visit Location", stamps: 1 },
-    { date: "7/13/2023", activity: "Visit Location", stamps: 1 },
-    { date: "7/10/2023", activity: "Visit Location", stamps: 1 },
-    { date: "7/09/2023", activity: "Visit Location", stamps: 1 },
-    { date: "6/30/2023", activity: "Stamp Redeemed: One Free Photo", stamps: -5 },
-  ];
-
+interface Row { date: string; activity: string; stamps: number; }
+export default function StampsTable({ rows }: { rows: Row[] }) {
   return (
     <div className="stamps-table">
       <h3 className="table-title">Stamp Activity</h3>
@@ -23,11 +16,11 @@ export default function StampsTable() {
             </tr>
           </thead>
           <tbody>
-            {activity.map((entry, index) => (
-              <tr key={index}>
-                <td>{entry.date}</td>
-                <td>{entry.activity}</td>
-                <td>{entry.stamps > 0 ? `+${entry.stamps}` : entry.stamps}</td>
+            {rows.map((r, i) => (
+              <tr key={i}>
+                <td>{new Date(r.date).toLocaleDateString()}</td>
+                <td>{r.activity}</td>
+                <td>{r.stamps > 0 ? `+${r.stamps}` : r.stamps}</td>
               </tr>
             ))}
           </tbody>

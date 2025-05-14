@@ -44,3 +44,9 @@
   background-color: #999;
   cursor: not-allowed;
 }
+
+.redeem-button.disabled {
+  background:#aaa;
+  cursor:not-allowed;
+  opacity:0.6;
+}

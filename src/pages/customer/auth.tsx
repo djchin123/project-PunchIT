@@ -1,230 +1,151 @@
-//auth.tsx
+// pages/customer/auth.tsx
 import { useState } from 'react';
 import '../../styles/auth/auth.css';
 import { useNavigate } from 'react-router-dom';
 import logo from '../../assets/logo.png';
 
 const Auth = () => {
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
+  /* ---------------------------------------------------- *
+   *  shared state
+   * ---------------------------------------------------- */
   const [isBusinessLogin, setIsBusinessLogin] = useState(false);
-  const [username, setUsername] = useState('');
+
+  /*  LOGIN  ------------------------------------------------ */
+  const [email,    setEmail]    = useState('');
   const [password, setPassword] = useState('');
 
-  // Forgot password modal
-  const [showForgotPassword, setShowForgotPassword] = useState(false);
-  const [emailForReset, setEmailForReset] = useState('');
-
-  // Register modal
-  const [showRegister, setShowRegister] = useState(false);
-  const [registerEmail, setRegisterEmail] = useState('');
-  const [registerPassword, setRegisterPassword] = useState('');
-
-  // ---------------------------
-  // LOGIN LOGIC
-  // ---------------------------
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: username, password }),
+      const r = await fetch('http://localhost:3001/api/login', {
+        method : 'POST',
+        headers: { 'Content-Type':'application/json' },
+        body   : JSON.stringify({ email, password })
       });
+      const json = await r.json();
+      if (!r.ok) return alert(json.error || 'Login failed');
 
-      const data = await response.json();
-      if (response.ok) {
-        if (isBusinessLogin) {
-          navigate('/business/dashboard');
-        } else {
-          // If not business, route to your main customer page
-          navigate('/customer');
-        }
-      } else {
-        alert(data.error || 'Login failed');
-      }
-    } catch (error) {
-      console.error(error);
-      alert('An error occurred during login.');
+      // store user id for later API calls
+      localStorage.setItem('punchit_user', json.user.user_id);
+      localStorage.setItem('punchit_userType', json.user.user_type);
+
+      nav(json.user.user_type === 'business_owner'
+            ? '/business/dashboard'
+            : '/customer');
+    } catch(e){
+      console.error(e);
+      alert('Network error during login');
     }
   };
 
-  // ---------------------------
-  // SWITCH TO BUSINESS LOGIN
-  // ---------------------------
-  const handleToggleLoginType = () => {
-    setIsBusinessLogin((prev) => !prev);
-  };
-
-  // ---------------------------
-  // FORGOT PASSWORD MODAL
-  // ---------------------------
-  const handleForgotPassword = () => {
-    setShowForgotPassword(true);
-  };
-
-  const handleCloseModal = () => {
-    setShowForgotPassword(false);
-    setEmailForReset('');
-  };
-
-  const handleSendResetLink = () => {
-    alert(`Reset link sent to ${emailForReset}`);
-    setShowForgotPassword(false);
-  };
-
-  // ---------------------------
-  // REGISTER MODAL
-  // ---------------------------
-  const handleOpenRegister = () => {
-    setShowRegister(true);
-  };
-
-  const handleCloseRegister = () => {
-    setShowRegister(false);
-    setRegisterEmail('');
-    setRegisterPassword('');
-  };
+  /*  REGISTER  ------------------------------------------- */
+  const [showReg, setShowReg] = useState(false);
+  const [reg, setReg] = useState({
+    first_name:'', last_name:'', email:'', password:'',
+    phone:'', date_of_birth:'', user_type:'customer'
+  });
 
   const handleRegister = async () => {
     try {
-      const response = await fetch('http://localhost:3001/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: registerEmail, password: registerPassword }),
+      const r = await fetch('http://localhost:3001/api/register', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(reg)
       });
-      const data = await response.json();
-      if (response.ok) {
-        alert('Registration successful!');
-        setShowRegister(false);
-      } else {
-        alert(data.error || 'Registration failed');
-      }
-    } catch (error) {
-      console.error(error);
-      alert('An error occurred during registration.');
+      const j = await r.json();
+      if (!r.ok) return alert(j.error || 'Registration failed');
+
+      alert(`Registered! Your referral code is ${j.referral_code}`);
+      setShowReg(false);
+    }catch(e){
+      console.error(e);
+      alert('Registration error');
     }
   };
 
+  /* ---------------------------------------------------- */
   return (
     <div className="auth-container">
-      {/* LOGO */}
+      {/* logo */}
       <div className="auth-logo">
-        <img src={logo} alt="App Logo" className="fade-in-logo" />
+        <img src={logo} alt="App Logo" className="fade-in-logo"/>
       </div>
 
-      {/* TITLE */}
       <h1 className="auth-title">
         {isBusinessLogin ? 'Business Login' : 'Customer Login'}
       </h1>
 
-      {/* LOGIN FORM */}
+      {/* LOGIN FORM ------------------------------------ */}
       <div className="auth-form slide-up-animation">
-        <label htmlFor="username" className="form-label">
-          Email
-        </label>
-        <input
-          id="username"
-          type="email"
-          value={username}
-          className="form-input"
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <label className="form-label">Email</label>
+        <input type="email" className="form-input"
+               value={email} onChange={e=>setEmail(e.target.value)}/>
 
-        <label htmlFor="password" className="form-label">
-          Password
-        </label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          className="form-input"
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <label className="form-label">Password</label>
+        <input type="password" className="form-input"
+               value={password} onChange={e=>setPassword(e.target.value)}/>
 
         <div className="auth-actions">
-          <button
-            type="button"
-            className="forgot-password"
-            onClick={handleForgotPassword}
-          >
-            Forgot Password?
-          </button>
-
-          {/* REPLACE OLD SWITCH BUTTON WITH REGISTER */}
-          <button
-            type="button"
-            className="register-button"
-            onClick={handleOpenRegister}
-          >
+          <button className="register-button" onClick={()=>setShowReg(true)}>
             New here? Register now!
           </button>
         </div>
 
-        <button type="button" className="login-button" onClick={handleLogin}>
-          Login
-        </button>
+        <button className="login-button" onClick={handleLogin}>Login</button>
       </div>
 
-      {/* A SMALL LINK FOR SWITCHING TO BUSINESS LOGIN */}
       <div className="switch-login-type">
         <button
-          type="button"
-          onClick={handleToggleLoginType}
-          style={{
-            background: 'none',
-            border: 'none',
-            textDecoration: 'underline',
-            cursor: 'pointer',
-            marginTop: '10px',
-            color: '#555',
-          }}
+          style={{background:'none',border:'none',textDecoration:'underline',cursor:'pointer',marginTop:'10px'}}
+          onClick={()=>setIsBusinessLogin(p=>!p)}
         >
           {isBusinessLogin ? 'Switch to Customer Login' : 'Switch to Business Login'}
         </button>
       </div>
 
-      {/* FORGOT PASSWORD MODAL */}
-      {showForgotPassword && (
-        <div className="modal-backdrop">
-          <div className="modal-content">
-            <h2>Reset Password</h2>
-            <p>Please enter your email address to receive a reset link.</p>
-            <input
-              type="email"
-              placeholder="Your email"
-              value={emailForReset}
-              onChange={(e) => setEmailForReset(e.target.value)}
-            />
-            <div className="modal-buttons">
-              <button onClick={handleSendResetLink}>Send Link</button>
-              <button onClick={handleCloseModal}>Cancel</button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* REGISTER MODAL */}
-      {showRegister && (
+      {/* REGISTER MODAL -------------------------------- */}
+      {showReg && (
         <div className="modal-backdrop">
           <div className="modal-content">
             <h2>Create an Account</h2>
+
+            <label>First name</label>
+            <input value={reg.first_name}
+                   onChange={e=>setReg({...reg,first_name:e.target.value})}/>
+
+            <label>Last name</label>
+            <input value={reg.last_name}
+                   onChange={e=>setReg({...reg,last_name:e.target.value})}/>
+
             <label>Email</label>
-            <input
-              type="email"
-              placeholder="Enter email"
-              value={registerEmail}
-              onChange={(e) => setRegisterEmail(e.target.value)}
-            />
+            <input type="email" value={reg.email}
+                   onChange={e=>setReg({...reg,email:e.target.value})}/>
+
             <label>Password</label>
-            <input
-              type="password"
-              placeholder="Enter password"
-              value={registerPassword}
-              onChange={(e) => setRegisterPassword(e.target.value)}
-            />
+            <input type="password" value={reg.password}
+                   onChange={e=>setReg({...reg,password:e.target.value})}/>
+
+            <label>Phone</label>
+            <input value={reg.phone}
+                   onChange={e=>setReg({...reg,phone:e.target.value})}/>
+
+            <label>Date of birth</label>
+            <input type="date" value={reg.date_of_birth}
+                   onChange={e=>setReg({...reg,date_of_birth:e.target.value})}/>
+
+            <label>Account type</label>
+            <select
+              value={reg.user_type}
+              onChange={e=>setReg({...reg,user_type:e.target.value})}
+            >
+              <option value="customer">Customer</option>
+              <option value="business_owner">Business</option>
+            </select>
+
             <div className="modal-buttons">
               <button onClick={handleRegister}>Register</button>
-              <button onClick={handleCloseRegister}>Cancel</button>
+              <button onClick={()=>setShowReg(false)}>Cancel</button>
             </div>
           </div>
         </div>

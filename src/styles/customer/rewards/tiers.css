@@ -1,22 +1,38 @@
+/* styles/customer/rewards/tiers.css  ── only the first rule changed */
 .tier-container {
-    background: linear-gradient(to right, #b2834a, #FFF7F3);
-    color: white;
-    padding: 1.5rem;
-    border-radius: 1rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-                0 4px 6px -4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .tier-container .label {
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: #fff;
-  }
-  
-  .tier-container .value {
-    font-size: 1.875rem;
-    font-weight: 700;
-    margin-top: 0.5rem;
-    color: #fff;
-  }
-  
+  background: linear-gradient(to right, #b2834a, #FFF7F3);
+  color: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -4px rgba(0, 0, 0, 0.1);
+
+  border: 4px solid transparent;
+}
+
+.tier-container .label {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.tier-container .value {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-top: 0.5rem;
+  color: #fff;
+}
+/* bronze → warm copper */
+.tier-container.bronze {
+  background: linear-gradient(to right, #c58f59 0%, #e0b17d 100%);
+}
+
+/* silver → cool greys */
+.tier-container.silver {
+  background: linear-gradient(to right, #bdbdbd 0%, #e6e6e6 100%);
+}
+
+/* gold → rich yellows */
+.tier-container.gold {
+  background: linear-gradient(to right, #d4af37 0%, #f9e79f 100%);
+}
