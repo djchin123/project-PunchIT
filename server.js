@@ -1,4 +1,4 @@
-// server.js  – PunchIT API (customer-side only)
+
 import cors    from 'cors';
 import dotenv  from 'dotenv';
 import express from 'express';
@@ -11,7 +11,7 @@ const app = express();
 app.use(express.json());
 app.use(cors({ origin: 'http://localhost:5173', credentials: true }));
 
-/* ────────────────────────────  POSTGRES  ─────────────────────────────── */
+/* ─────────────── POSTGRES ─────────────── */
 const pool = new Pool({
   user:     process.env.DATABASE_USER,
   host:     process.env.DATABASE_HOST,
@@ -21,35 +21,34 @@ const pool = new Pool({
 });
 const run = (q, p = []) => pool.query(q, p);
 
-/* ────────────────────────────  HELPERS  ─────────────────────────────── */
+/* ─────────────── HELPERS ─────────────── */
 const buildReferral = (f, l) =>
   f.toLowerCase().replace(/\s+/g, '') +
   l.toLowerCase().replace(/\s+/g, '') +
   Math.floor(1000 + Math.random() * 9000);
 
-/* ────────────────────────────  AUTH  ────────────────────────────────── */
+/* ─────────────── AUTH ─────────────── */
 app.post('/api/register', async (req, res) => {
   const {
     first_name, last_name, email, password,
     phone, date_of_birth, user_type = 'customer'
   } = req.body;
-
   if (!first_name || !last_name || !email || !password)
     return res.status(400).json({ error: 'Missing required fields' });
 
   try {
     const hashed = await hash(password, 10);
-    const ref    = buildReferral(first_name, last_name);
+    const ref = buildReferral(first_name, last_name);
 
     const { rows } = await run(
       `INSERT INTO Users
-         (first_name,last_name,email,password,phone,date_of_birth,referral_code,user_type)
+         (first_name,last_name,email,password,phone,date_of_birth,
+          referral_code,user_type)
        VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
        RETURNING user_id, referral_code`,
       [ first_name, last_name, email, hashed,
         phone, date_of_birth, ref, user_type ]
     );
-
     res.status(201).json({
       message: 'User registered',
       user_id: rows[0].user_id,
@@ -81,16 +80,13 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-/* ─────────────────────  CUSTOMER PROFILE ENDPOINTS  ──────────────────── */
-// detailed profile (used by Account page)
+/* ─────────────── PROFILE ─────────────── */
 app.get('/api/customer/:id/profile', async (req, res) => {
   const { id } = req.params;
   try {
     const { rows } = await run(
-      `SELECT user_id, first_name, last_name, email, phone,
-              date_of_birth, created_at
-         FROM Users
-        WHERE user_id=$1`,
+      `SELECT user_id,first_name,last_name,email,phone,date_of_birth,created_at
+         FROM Users WHERE user_id=$1`,
       [id]
     );
     if (!rows.length) return res.status(404).json({ error: 'User not found' });
@@ -101,7 +97,6 @@ app.get('/api/customer/:id/profile', async (req, res) => {
   }
 });
 
-// update editable profile fields
 app.put('/api/customer/:id', async (req, res) => {
   const { id } = req.params;
   const { first_name, last_name, phone, date_of_birth } = req.body;
@@ -119,42 +114,144 @@ app.put('/api/customer/:id', async (req, res) => {
   }
 });
 
-/* ─────────────────────────  SUMMARY / DASHBOARD  ─────────────────────── */
+/* ─────────────── DASHBOARD + REWARDS SUMMARY ─────────────── */
 app.get('/api/customer/:id/summary', async (req, res) => {
   const { id } = req.params;
   try {
-    const { rows } = await run(
-      `SELECT first_name,last_name,email,phone,date_of_birth,created_at,
-              current_stamps,total_stamps
-         FROM Users
-        WHERE user_id=$1`,
-      [id]
-    );
-    if (!rows.length) return res.status(404).json({ error: 'User not found' });
+    let { rows } = await run(
+      `SELECT user_id, first_name, referral_code,
+              current_stamps, total_stamps, created_at
+         FROM Users WHERE user_id=$1`, [id]);
 
-    const u = rows[0];
-    const tier =
-      u.total_stamps >= 24 ? 'Gold' :
-      u.total_stamps >= 12 ? 'Silver' : 'Bronze';
+    if (!rows.length) return res.status(404).json({ error:'User not found' });
 
-    const act = await run(
+    // if an older account somehow has NULL referral_code, generate one on-the-fly
+    let u = rows[0];
+    if (!u.referral_code) {
+      const newCode =
+        u.first_name.toLowerCase().replace(/\s+/g,'') +
+        Math.floor(1000+Math.random()*9000);
+      await run('UPDATE Users SET referral_code=$1 WHERE user_id=$2',
+                [newCode, id]);
+      u.referral_code = newCode;
+    }
+
+/* tier thresholds: 0-3 Bronze, 4-7 Silver, 8+ Gold */
+const tier = "Bronze"; // default
+
+if (u.total_stamps >= 12) {tier = 'Gold';} 
+else if (u.total_stamps >= 8) {tier = 'Silver';}
+else if (u.total_stamps >= 4) {tier = 'Bronze';}
+
+
+    const actQ = await run(
       `SELECT scanned_at AS date, activity, change AS stamps
-         FROM Stamps
-        WHERE user_id=$1
-        ORDER BY scanned_at DESC
-        LIMIT 20`, [id]
-    );
+         FROM Stamps WHERE user_id=$1
+         ORDER BY scanned_at DESC LIMIT 50`, [id]);
 
-    res.json({ ...u, tier, activity: act.rows });
+    const refQ = await run(
+      'SELECT COUNT(*) FROM Referrals WHERE referrer_id=$1', [id]);
+
+    res.json({
+      first_name     : u.first_name,
+      referral_code  : u.referral_code,
+      current_stamps : u.current_stamps,
+      total_stamps   : u.total_stamps,
+      tier,
+      referral_count : Number(refQ.rows[0].count),
+      activity       : actQ.rows
+    });
   } catch (e) {
     console.error(e);
-    res.status(500).json({ error: 'Failed to fetch summary' });
+    res.status(500).json({ error:'Failed to fetch summary' });
   }
 });
 
-/* ────────────────────────────  OTHER CUSTOMER OPS  ───────────────────── */
-// … (add-stamp, redeem, etc. unchanged from previous version) …
+/* ─────────────── ADD-STAMP (Scan) ─────────────── */
+app.post('/api/customer/:id/add-stamp', async (req, res) => {
+  const { id } = req.params;
+  const { secret_key } = req.body;
+  if (!secret_key) return res.status(400).json({ error: 'Key required' });
 
-/* ────────────────────────────  LISTEN  ───────────────────────────────── */
+  try {
+    const keyQ = await run(
+      'SELECT key_value FROM SecretKeys WHERE key_value=$1 AND is_active=TRUE',
+      [secret_key]
+    );
+    if (!keyQ.rows.length)
+      return res.status(400).json({ error: 'Invalid secret key' });
+
+    await run('BEGIN');
+
+    const user = await run(
+      `UPDATE Users
+          SET total_stamps   = total_stamps + 1,
+              current_stamps = CASE WHEN current_stamps < 12
+                                    THEN current_stamps + 1
+                                    ELSE current_stamps END
+        WHERE user_id=$1
+        RETURNING current_stamps,total_stamps`, [id]);
+
+    if (!user.rows.length) {
+      await run('ROLLBACK');
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    await run(
+      `INSERT INTO Stamps (user_id, change, activity)
+       VALUES ($1, 1, 'Visit Location')`, [id]);
+
+    await run('COMMIT');
+    res.json({ message: 'Stamp added' });
+  } catch (e) {
+    await run('ROLLBACK');
+    console.error(e);
+    res.status(500).json({ error: 'Could not add stamp' });
+  }
+});
+
+/* ─────────────── REDEEM ─────────────── */
+app.post('/api/customer/:id/redeem', async (req, res) => {
+  const { id } = req.params;
+  const { reward_title, reward_cost } = req.body;
+  if (!reward_title || !reward_cost)
+    return res.status(400).json({ error: 'Title & cost required' });
+
+  try {
+    const u = await run('SELECT current_stamps FROM Users WHERE user_id=$1', [id]);
+    if (!u.rows.length) return res.status(404).json({ error:'User not found' });
+
+    if (u.rows[0].current_stamps < reward_cost)
+      return res.status(400).json({ error:'Not enough stamps' });
+
+    await run('BEGIN');
+
+    await run(
+      `UPDATE Users
+          SET current_stamps = current_stamps - $1
+        WHERE user_id = $2`,
+      [reward_cost, id]);
+
+    await run(
+      `INSERT INTO RewardRedemptions (user_id, reward_title, reward_cost)
+       VALUES ($1,$2,$3)`,
+      [id, reward_title, reward_cost]);
+
+    // send NEGATIVE value via param list (avoids ambiguous operator)
+    await run(
+      `INSERT INTO Stamps (user_id, change, activity)
+       VALUES ($1, $2, 'Stamp Redeemed: '||$3)`,
+      [id, -reward_cost, reward_title]);
+
+    await run('COMMIT');
+    res.json({ message:'Reward redeemed' });
+  } catch (e) {
+    await run('ROLLBACK');
+    console.error(e);
+    res.status(500).json({ error:'Redeem failed' });
+  }
+});
+
+/* ─────────────── LISTEN ─────────────── */
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`API listening on :${PORT}`));
